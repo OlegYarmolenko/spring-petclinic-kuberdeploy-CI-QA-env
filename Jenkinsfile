@@ -6,7 +6,7 @@ pipeline {
         echo 'Running build automation'
         sh './mvnw package'
         sh 'tar -czf ./webpackage.tar.gz src/main/* target/*'
-        archiveArtifacts artifacts: 'wepackage.tar.gz'
+        archiveArtifacts artifacts: 'webpackage.tar.gz'
       }
     }
   }
