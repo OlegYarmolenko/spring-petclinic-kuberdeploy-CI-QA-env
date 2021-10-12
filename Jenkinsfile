@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Running build automation'
         sh './mvnw package'
-        sh 'tar -czf ./wepackage.tar.gz .src/main/ .target'
+        sh 'tar -czf ./webpackage.tar.gz src/main/* target/*'
         archiveArtifacts artifacts: 'wepackage.tar.gz'
       }
     }
