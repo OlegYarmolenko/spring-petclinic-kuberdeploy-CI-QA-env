@@ -5,8 +5,8 @@ pipeline {
       steps {
         echo 'Running build automation'
         sh './mvnw package'
-        sh 'tar -czf ./webpackage.tar.gz src/main/* target/*'
-        archiveArtifacts artifacts: 'webpackage.tar.gz'
+        
+        archiveArtifacts artifacts: 'target/spring-petclinic-2.5.0-SNAPSHOT.jar'
       }
     }
   }
