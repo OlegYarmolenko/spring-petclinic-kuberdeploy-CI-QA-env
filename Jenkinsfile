@@ -4,7 +4,7 @@ pipeline {
     stage ('Build') {
       steps {
         echo 'Running build automation'
-        sh './mvnw package --no-daemon'
+        sh './mvnw package'
         archiveArtifacts artifacts: '*'
       }
     }
