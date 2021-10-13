@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Running build automation'
         sh './mvnw package'
-        sh "tar -czf ./webpackage.tar.gz target/spring-petclinic.${env.BUILD_NUMBER}.jar"
+        sh 'tar -czf ./webpackage.${env.BUILD_NUMBER}.tar.gz target/spring-petclinic-2.5.0-SNAPSHOT.jar'
         archiveArtifacts artifacts: 'webpackage.tar.gz'
       }
     }
