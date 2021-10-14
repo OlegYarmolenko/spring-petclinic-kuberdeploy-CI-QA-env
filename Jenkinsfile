@@ -16,7 +16,8 @@ pipeline {
             steps {
                 script {
                     app = docker.build("oyrmlnko/spring-petclinic${env.BUILD_NUMBER}")
-
+                    app.inside {
+                        sh 'echo $(curl localhost:8080)'
                 }
             }
         }
