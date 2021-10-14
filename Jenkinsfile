@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage ('Build') {
+    stage('Build') {
       steps {
         echo 'Running build automation'
         sh './mvnw package'
@@ -9,5 +9,18 @@ pipeline {
         archiveArtifacts artifacts: "spring-petclinic-webpackage${env.BUILD_NUMBER}.tar.gz"
       }
     }
+    stage('Build Docker Image') {
+    when {
+        branch 'main'
+    }
+    steps {
+        script {
+            app = docker.build("oyrmlnko/spring-petclinic${env.BUILD_NUMBER}")
+            app.inside {
+                sh 'echo $(curl localhost:8080)'
+            }
+        }
+    }
+}
   }
 }
