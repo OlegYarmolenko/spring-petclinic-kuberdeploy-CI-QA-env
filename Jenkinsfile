@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        //be sure to replace "willbla" with your own Docker Hub username
+        DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
+    }
     stages {
         stage('Build') {
             steps {
@@ -11,20 +15,20 @@ pipeline {
         }
         stage('Build Docker Image') {
             when {
-                branch 'main'
+                branch 'master'
             }
             steps {
                 script {
-                    app = docker.build("oyrmlnko/spring-petclinic")
+                    app = docker.build(DOCKER_IMAGE_NAME)
                     app.inside {
-                        sh 'echo $(curl localhost:8080)'
+                        sh 'echo Hello, World!'
                     }
                 }
             }
         }
         stage('Push Docker Image') {
             when {
-                branch 'main'
+                branch 'master'
             }
             steps {
                 script {
@@ -37,23 +41,16 @@ pipeline {
         }
         stage('DeployToProduction') {
             when {
-                branch 'main'
+                branch 'master'
             }
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
-                    script {
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull oyrmlnko/spring-petclinic:${env.BUILD_NUMBER}\""
-                        try {
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop spring-petclinic\""
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm spring-petclinic\""
-                        } catch (err) {
-                            echo: 'caught error: $err'
-                        }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name spring-petclinic -p 8080:8080 -d oyrmlnko/spring-petclinic:${env.BUILD_NUMBER}\""
-                    }
-                }
+                kubernetesDeploy(
+                    kubeconfigId: 'K8s',
+                    configs: 'spring-petclinic-kube.yml',
+                    enableConfigSubstitution: true
+                )
             }
         }
     }
