@@ -8,6 +8,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
         DEP_NAME = "MydepnamefromJenkinsfile"
         PORT = "$params.PORT"
+        PP = "7777"
     }
     stages {
         stage('DeployToProduction') {
