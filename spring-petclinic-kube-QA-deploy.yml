@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: spring-petclinic-service-QA
+spec:
+  type: LoadBalancer
+  selector:
+    app: spring-petclinic-QA
+  ports:
+  - protocol: TCP
+    port: $params.PORT
+    targetPort: $params.PORT
+    
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic-deployment-QA
+  labels:
+    app: spring-petclinic-QA
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-petclinic-QA
+  template:
+    metadata:
+      labels:
+        app: spring-petclinic-QA
+    spec:
+      containers:
+      - name: spring-petclinic-QA
+        image: $DOCKER_IMAGE_NAME:5
+        ports:
+        - containerPort: $params.PORT
