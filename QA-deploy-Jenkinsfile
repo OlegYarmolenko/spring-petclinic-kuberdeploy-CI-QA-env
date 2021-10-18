@@ -14,7 +14,7 @@ pipeline {
             steps {
                 kubernetesDeploy(
                     kubeconfigId: 'K8s',
-                    configs: 'spring-petclinic-kube-QA-deploy.yml',
+                    configs: 'spring-petclinic-kube-qa-deploy.yml',
                     enableConfigSubstitution: true
                 )
             }
