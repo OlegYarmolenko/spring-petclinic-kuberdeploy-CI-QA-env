@@ -8,7 +8,7 @@ spec:
     app: spring-petclinic
   ports:
   - protocol: TCP
-    port: $params.PORT
+    port: $PP
     targetPort: 8080
     
 ---
