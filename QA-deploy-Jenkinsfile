@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: "PORT", defaultValue: "8080", trim: true, description: "Port parameter")
+        string(name: "PORT", defaultValue: "8081", trim: true, description: "Port parameter")
     }
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
