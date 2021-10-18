@@ -6,6 +6,7 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
+        DEP_NAME = "My dep name from Jenkinsfile"
         PORT = "$params.PORT"
     }
     stages {
