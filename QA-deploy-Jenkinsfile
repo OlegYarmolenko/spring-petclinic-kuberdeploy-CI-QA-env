@@ -8,14 +8,11 @@ pipeline {
         DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
     }
     stages {
-
         stage('DeployToProduction') {
             steps {
-                input 'Deploy to Production?'
-                milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'K8s',
-                    configs: 'spring-petclinic-kube-QA-deploy',
+                    configs: 'spring-petclinic-kube-QA-deploy.yml',
                     enableConfigSubstitution: true
                 )
             }
