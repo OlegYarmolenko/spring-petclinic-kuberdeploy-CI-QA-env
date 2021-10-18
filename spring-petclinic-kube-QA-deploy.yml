@@ -8,8 +8,8 @@ spec:
     app: spring-petclinic-QA
   ports:
   - protocol: TCP
-    port: $params.PORT
-    targetPort: $params.PORT
+    port: $PORT
+    targetPort: $PORT
     
 ---
 
@@ -33,4 +33,4 @@ spec:
       - name: spring-petclinic-QA
         image: $DOCKER_IMAGE_NAME:5
         ports:
-        - containerPort: $params.PORT
+        - containerPort: $PORT
