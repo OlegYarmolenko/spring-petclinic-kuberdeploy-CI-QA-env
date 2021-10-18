@@ -16,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-petclinic-deployment-QA
+  name: $DEP_NAME
   labels:
     app: spring-petclinic-QA
 spec:
