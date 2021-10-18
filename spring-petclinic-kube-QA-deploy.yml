@@ -33,4 +33,4 @@ spec:
       - name: spring-petclinic-QA
         image: $DOCKER_IMAGE_NAME:5
         ports:
-        - containerPort: ${params.PORT}
+        - containerPort: $PORT
