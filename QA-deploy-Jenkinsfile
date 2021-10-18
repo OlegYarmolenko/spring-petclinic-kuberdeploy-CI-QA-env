@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: "PORT", defaultValue: "8080", trim: true, description: "Port parameter")
+    }
+    environment {
+        //be sure to replace "willbla" with your own Docker Hub username
+        DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
+    }
+    stages {
+
+        stage('DeployToProduction') {
+            steps {
+                input 'Deploy to Production?'
+                milestone(1)
+                kubernetesDeploy(
+                    kubeconfigId: 'K8s',
+                    configs: 'spring-petclinic-kube-QA-deploy',
+                    enableConfigSubstitution: true
+                )
+            }
+        }
+    }
+}
