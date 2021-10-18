@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: spring-petclinic-qa
+  name: spring-petclinic-service-qa
 spec:
   type: LoadBalancer
   selector:
