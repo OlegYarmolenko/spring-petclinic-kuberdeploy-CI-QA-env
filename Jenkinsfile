@@ -48,7 +48,7 @@ pipeline {
                 milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'K8s',
-                    configs: 'spring-petclinic-kube.yml',
+                    configs: 'spring-petclinic-kube-QA-deploy',
                     enableConfigSubstitution: true
                 )
             }
