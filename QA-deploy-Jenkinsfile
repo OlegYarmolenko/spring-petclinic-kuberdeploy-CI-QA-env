@@ -4,11 +4,8 @@ pipeline {
         string(name: "PORT", defaultValue: "8081", trim: true, description: "Port parameter")
     }
     environment {
-        //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
-        DEP_NAME = "MydepnamefromJenkinsfile"
         PORT = "$params.PORT"
-        PP = "7777"
     }
     stages {
         stage('DeployToProduction') {
