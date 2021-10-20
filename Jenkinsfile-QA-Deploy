@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: "PORT", defaultValue: "8081", trim: true, description: "Choose Port to expose")
-        string(name: "BUILD_NUMBER", defaultValue: "1", trim: true, description: "Choose build number to deploy")
+        string(name: "BUILD_NUMBER", defaultValue: "8", trim: true, description: "Choose build number to deploy")
     }
     environment {
         DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
