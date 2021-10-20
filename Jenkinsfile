@@ -44,8 +44,6 @@ pipeline {
                 branch 'main'
             }
             steps {
-                input 'Deploy to Production?'
-                milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'K8s',
                     configs: 'spring-petclinic-kube.yml',
