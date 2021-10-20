@@ -1,11 +1,13 @@
 pipeline {
     agent any
     parameters {
-        string(name: "PORT", defaultValue: "8081", trim: true, description: "Port parameter")
+        string(name: "PORT", defaultValue: "8081", trim: true, description: "Choose Port to expose")
+        string(name: "BUILD_NUMBER", defaultValue: "1", trim: true, description: "Choose build number to deploy")
     }
     environment {
         DOCKER_IMAGE_NAME = "oyrmlnko/spring-petclinic"
         PORT = "$params.PORT"
+        BUILD_N = "$params.BUILD_NUMBER"
     }
     stages {
         stage('DeployToProduction') {
