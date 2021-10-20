@@ -31,6 +31,6 @@ spec:
     spec:
       containers:
       - name: spring-petclinic-qa
-        image: $DOCKER_IMAGE_NAME:5
+        image: $DOCKER_IMAGE_NAME:$BUILD_N
         ports:
         - containerPort: 8080
