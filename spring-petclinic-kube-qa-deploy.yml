@@ -3,7 +3,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: spring-petclinic-service-qa
-  namespace: qa
 spec:
   type: LoadBalancer
   selector:
@@ -19,7 +18,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-petclinic-deployment-qa
-  namespace: qa
   labels:
     app: spring-petclinic-qa
 spec:
